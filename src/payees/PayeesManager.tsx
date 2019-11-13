@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { payeesDao } from './payees-dao';
-import PayeesGrid from './PayeesGrid';
+import PayeesGrid, { ColumnConfig } from './PayeesGrid';
 import { Payee } from './payee-types';
 
 const PayeesManager = () => {
@@ -9,6 +9,25 @@ const PayeesManager = () => {
   useEffect(() => {
     payeesDao.getPayees().then(payees => setPayees(payees));
   }, []);
+
+  const columns: ColumnConfig[] = [
+    {
+      field: 'payeeName',
+      label: 'Payee Name',
+    },
+    {
+      field: 'address.city',
+      label: 'City'
+    },
+    {
+      field: 'address.state',
+      label: 'State'
+    },
+    {
+      field: 'categoryId',
+      label: 'Category'
+    }
+  ];
 
   return (
     <React.Fragment>
@@ -19,7 +38,7 @@ const PayeesManager = () => {
         </div>
       </div>
       <section>
-        <PayeesGrid payees={payees}/>
+        <PayeesGrid payees={payees} columnConfig={columns}/>
       </section>
     </React.Fragment>
   );

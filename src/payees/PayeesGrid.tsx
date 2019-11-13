@@ -1,46 +1,75 @@
 import React from 'react';
+import * as lodash from 'lodash';
 import { Payee } from './payee-types';
+
+export interface ColumnConfig {
+  field: string;
+  label: string;
+}
 
 interface PayeesGridProps {
   payees: Payee[];
-  columnConfig?: any;
+  columnConfig: ColumnConfig[];
 }
 
 const PayeesGrid = ({ payees, columnConfig }: PayeesGridProps) => {
   return (
     <table className="table table-striped table-hover">
-      <PayeesGridHeader />
+      <PayeesGridHeader columnConfig={columnConfig} />
       <tbody>
         {payees.map(payee => (
-          <PayeesGridRow payee={payee} />
+          <PayeesGridRow
+            payee={payee}
+            key={payee.id}
+            columnConfig={columnConfig}
+          />
         ))}
       </tbody>
     </table>
   );
 };
 
-const PayeesGridHeader = () => {
+/* interface PayeesGridHeaderProps {
+  columns: ColumnConfig[];
+}
+ */
+
+type PayeesGridHeaderProps = Pick<PayeesGridProps, 'columnConfig'>;
+
+const PayeesGridHeader = ({ columnConfig }: PayeesGridHeaderProps) => {
   return (
     <thead>
       <tr>
-        <th>Payee Name</th>
-        <th>City</th>
-        <th>State</th>
+        {columnConfig.map(column => (
+          <th key={column.field}>{column.label}</th>
+        ))}
       </tr>
     </thead>
   );
 };
 
-interface PayeesGridRowProps {
+/* interface PayeesGridRowProps {
+  payee: Payee;
+}
+ */
+/*
+ interface PayeeProp {
+  payee: Payee;
+}
+*/
+
+// type PayeesGridRowProps = Pick<PayeesGridProps, 'columnConfig'> & PayeeProp;
+
+interface PayeesGridRowProps extends Pick<PayeesGridProps, 'columnConfig'> {
   payee: Payee;
 }
 
-const PayeesGridRow = ({ payee }: PayeesGridRowProps) => {
+const PayeesGridRow = ({ payee, columnConfig }: PayeesGridRowProps) => {
   return (
     <tr>
-      <td>{payee.payeeName}</td>
-      <td>{payee.address && payee.address.city}</td>
-      <td>{payee.address && payee.address.state}</td>
+      {columnConfig.map(column => (
+        <td key={column.field}>{lodash.get(payee, column.field)}</td>
+      ))}
     </tr>
   );
 };
