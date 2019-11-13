@@ -17,6 +17,7 @@ const NameField = ({ updateName }: NameFieldProps) => {
       <input
         type="text"
         id="your-name"
+        className="form-control"
         onChange={e => setYourName(e.target.value)}
         value={yourName}
         onBlur={handleBlur}
@@ -43,7 +44,7 @@ interface ToggleButtonProps {
 }
 const ToggleButton = ({ toggle, onOrOff }: ToggleButtonProps) => {
   return (
-    <button type="button" onClick={() => toggle(!onOrOff)}>
+    <button type="button" className="btn btn-primary" onClick={() => toggle(!onOrOff)}>
       {onOrOff ? 'Hide' : 'Show'}
     </button>
   );
@@ -54,8 +55,9 @@ const WelcomeForm = () => {
   const [status, toggleStatus] = useState(false);
 
   return (
-    <div>
+    <div className="form-group">
       <NameField updateName={setName} />
+      <br/>
       <ToggleButton toggle={() => toggleStatus(!status)} onOrOff={status} />
       <br />
       {status ? <Greeting name={name} /> : <div />}

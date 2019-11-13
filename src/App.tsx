@@ -5,22 +5,24 @@ import BankingHeader from './BankingHeader';
 import WelcomeForm from './WelcomeFormRefactored';
 import './App.css';
 
-const ComponentOne = () => (
-  <h2>Component One</h2>
-)
+const ComponentOne = () => <h2>Component One</h2>;
 
-const ComponentTwo = () => (
-  <h2>Component Two</h2>
-)
+const ComponentTwo = () => <h2>Component Two</h2>;
 
 const App: React.FC = () => {
   const companyName = 'Variable Company Name';
   return (
     <Router>
-      <main>
-        <BankingHeader company={companyName} region="Chicagoland" />
-        <section>
-          <WelcomeForm />
+      <main className="container">
+        <div className="row">
+          <div className="col">
+            <BankingHeader company={companyName} region="Chicagoland" />
+          </div>
+        </div>
+        <section className="row">
+          <div className="col">
+            <WelcomeForm />
+          </div>
         </section>
         <section>
           <ul>
@@ -36,16 +38,14 @@ const App: React.FC = () => {
           </ul>
           <Route path="/component-one" component={ComponentOne} />
           <Route path="/component-two" component={ComponentTwo} />
-          <Route path="/option-three" render={ () => (
-            <h3>This is option three</h3>
-          )} />
-
-
+          <Route
+            path="/option-three"
+            render={() => <h3>This is option three</h3>}
+          />
         </section>
       </main>
     </Router>
   );
 };
-
 
 export default App;
