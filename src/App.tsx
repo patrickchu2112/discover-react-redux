@@ -3,7 +3,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import BankingHeader from './BankingHeader';
 import WelcomeForm from './WelcomeFormRefactored';
-import './App.css';
+import PayeesManager from './payees/PayeesManager';
+import TransactionsManager from './transactions/TransactionsManager';
 
 const ComponentOne = () => <h2>Component One</h2>;
 
@@ -19,29 +20,23 @@ const App: React.FC = () => {
             <BankingHeader company={companyName} region="Chicagoland" />
           </div>
         </div>
-        <section className="row">
+        {/*         <section className="row">
           <div className="col">
             <WelcomeForm />
           </div>
         </section>
+ */}
         <section>
-          <ul>
-            <li>
-              <Link to="/component-one">Component One</Link>
+          <ul className="list-inline">
+            <li className="list-inline-item">
+              <Link to="/payees">Payees</Link>
             </li>
-            <li>
-              <Link to="/component-two">Component Two</Link>
-            </li>
-            <li>
-              <Link to="/option-three">Option Three</Link>
+            <li className="list-inline-item">
+              <Link to="/transactions">Transactions</Link>
             </li>
           </ul>
-          <Route path="/component-one" component={ComponentOne} />
-          <Route path="/component-two" component={ComponentTwo} />
-          <Route
-            path="/option-three"
-            render={() => <h3>This is option three</h3>}
-          />
+          <Route path="/payees" component={PayeesManager} />
+          <Route path="/transactions" component={TransactionsManager} />
         </section>
       </main>
     </Router>
