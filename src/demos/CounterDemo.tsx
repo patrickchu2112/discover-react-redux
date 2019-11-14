@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DemosState } from './demos-reducer';
+import { Dispatch } from 'redux';
+import {decrement, increment} from './demos-actions';
 
 interface CounterDemoProps {
   // Counter prop
@@ -28,6 +30,17 @@ const mapStateToProps = (state: DemosState) => ({
   value: state.counter,
 });
 
-const CounterDemoRedux = connect(mapStateToProps)(CounterDemo);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  // Prop on component : dispatch(actionCreator())
+  // increment: () => dispatch({type: 'INCREMENT'}),
+  increment: () => dispatch(increment()),
+  decrement: () => dispatch(decrement())
+})
+
+const betterMapDispatchToProps = {
+  increment, decrement
+}
+
+const CounterDemoRedux = connect(mapStateToProps, betterMapDispatchToProps)(CounterDemo);
 
 export default CounterDemoRedux;
