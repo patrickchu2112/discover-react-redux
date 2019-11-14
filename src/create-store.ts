@@ -1,5 +1,11 @@
 import { createStore } from 'redux';
-import { reducer as demosReducer } from './demos/demos-reducer';
+import { reducer as demosReducer, DemosState } from './demos/demos-reducer';
 
-const store = createStore(demosReducer);
+const initialState: DemosState = {
+  counter: 5
+}
+
+const store = createStore(demosReducer, initialState);
+
+export {store};
 

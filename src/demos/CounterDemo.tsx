@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { DemosState } from './demos-reducer';
 
 interface CounterDemoProps {
   // Counter prop
@@ -14,7 +16,7 @@ const CounterDemo = ({ value, increment, decrement }: CounterDemoProps) => {
       <button className="btn btn-primary" onClick={decrement}>
         Subtract
       </button>
-      {value}
+      &nbsp;{value}&nbsp;
       <button className="btn btn-info" onClick={increment}>
         Add
       </button>
@@ -22,4 +24,10 @@ const CounterDemo = ({ value, increment, decrement }: CounterDemoProps) => {
   );
 };
 
-export default CounterDemo;
+const mapStateToProps = (state: DemosState) => ({
+  value: state.counter,
+});
+
+const CounterDemoRedux = connect(mapStateToProps)(CounterDemo);
+
+export default CounterDemoRedux;
