@@ -1,6 +1,9 @@
 import React from 'react';
 import * as lodash from 'lodash';
 import { Payee } from './payee-types';
+import { connect } from 'react-redux';
+import { sortPayees } from './payees-actions';
+import { Dispatch } from 'redux';
 
 export interface ColumnConfig {
   field: string;
@@ -16,7 +19,7 @@ interface PayeesGridProps {
 const PayeesGrid = ({ payees, columnConfig, sortPayees }: PayeesGridProps) => {
   return (
     <table className="table table-striped table-hover">
-      <PayeesGridHeader columnConfig={columnConfig} sortPayees={sortPayees}/>
+      <PayeesGridHeaderRedux columnConfig={columnConfig} />
       <tbody>
         {payees.map(payee => (
           <PayeesGridRow
@@ -51,6 +54,12 @@ const PayeesGridHeader = ({
     </thead>
   );
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  sortPayees: (field: string) => dispatch(sortPayees(field)),
+});
+
+const PayeesGridHeaderRedux = connect(null, mapDispatchToProps)(PayeesGridHeader);
 
 interface PayeesGridRowProps extends Pick<PayeesGridProps, 'columnConfig'> {
   payee: Payee;

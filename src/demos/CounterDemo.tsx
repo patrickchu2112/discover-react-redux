@@ -26,8 +26,8 @@ const CounterDemo = ({ value, increment, decrement }: CounterDemoProps) => {
   );
 };
 
-const mapStateToProps = (state: DemosState) => ({
-  value: state.counter,
+const mapStateToProps = ({demos}: {demos: DemosState}) => ({
+  value: demos.counter,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

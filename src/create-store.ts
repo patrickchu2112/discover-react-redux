@@ -14,8 +14,7 @@ const megaReducer = combineReducers({
 });
 
 const store = createStore(
-  demosReducer,
-  initialState,
+  megaReducer,
   composeWithDevTools(applyMiddleware(logger)),
 );
 

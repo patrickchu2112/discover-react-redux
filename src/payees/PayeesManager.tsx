@@ -38,7 +38,7 @@ const PayeesManager = () => {
         </div>
       </div>
       <section>
-        <PayeesGrid payees={payees} columnConfig={columns}/>
+        <PayeesGrid payees={payees} columnConfig={columns} sortPayees={() => {}}/>
       </section>
     </React.Fragment>
   );
