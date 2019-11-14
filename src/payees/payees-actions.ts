@@ -21,6 +21,9 @@ const sortPayees = (field: string, direction?: 'asc' | 'desc') => {
 
 const requestPayees = () => ({
   type: payeeActions.REQUEST_PAYEES,
+  payload: {
+    isLoading: true
+  }
 });
 
 const requestPayeesSuccess = (payees: Payee[]) => ({

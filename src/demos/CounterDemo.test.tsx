@@ -16,6 +16,8 @@ describe('CounterDemo', () => {
       <CounterDemo value={value} increment={increment} decrement={decrement} />,
     );
 
+    expect(increment).not.toHaveBeenCalled();
+
     fireEvent.click(getByText('Add'));
     expect(increment).toHaveBeenCalled();
     expect(increment).toHaveBeenCalledTimes(1);
