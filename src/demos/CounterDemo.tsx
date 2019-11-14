@@ -44,3 +44,5 @@ const betterMapDispatchToProps = {
 const CounterDemoRedux = connect(mapStateToProps, betterMapDispatchToProps)(CounterDemo);
 
 export default CounterDemoRedux;
+
+export {CounterDemo};

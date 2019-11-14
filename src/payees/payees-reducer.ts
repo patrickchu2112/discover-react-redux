@@ -22,7 +22,12 @@ const reducer = (state = defaultState, { type, payload }: AnyAction) => {
         nextState.sortDirection = 'desc';
       }
       return { ...state, ...nextState };
-
+    case payeeActions.REQUEST_PAYEES:
+      return { ...state, isLoading: true, error: null };
+    case payeeActions.REQUEST_PAYEES_SUCCESS:
+      return { ...state, isLoading: false, payees: payload.payees };
+    case payeeActions.REQUEST_PAYEES_ERROR:
+      return { ...state, isLoading: false, error: payload.error };
     default:
       return state;
   }
